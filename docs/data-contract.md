@@ -101,7 +101,6 @@ Tests cover all platforms/markets, normalized score consistency, exact settlemen
 
 The selector obtains leagues from the repository read model, and the board and history API validate and filter by league ID. Each league has independent synthetic records and historical evidence. The first league retains previous IDs for old bookmarks; requests without a league use it by default. A real adapter must return provider-owned league identities and consistent league IDs on schedules, results and picks; do not treat demo country coverage or clubs as provider data.
 
-
 ## Overview mockup refresh
 
 The Overview uses scoped `public/assets/overview.css` and `overview.js`, the server-rendered `views/overview.php`, and its platform card partial. It follows the Platforms design language with four separate account cards, three compact schedule cards, and three equally sized market-pulse, model-form and activity panels. Main panels fit together at 1440 x 900. Mobile uses a two-column account summary and stacked platform/analytics cards with no horizontal page overflow. See [overview-page.md](overview-page.md) for the layout and verification contract.

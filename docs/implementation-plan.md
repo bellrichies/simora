@@ -6,7 +6,6 @@
 
 **Referrals update:** See the [Referrals blueprint](referrals.md) for the current assessment, proposed architecture, open business decisions and phased delivery. A non-interactive page preview is implemented; live functionality depends on the unresolved decisions and foundations documented there.
 
-
 **Plans & Billing planning:** See [the Plans & Billing blueprint](plans-billing.md) for the current assessment, confirmed plan names, open decisions and phased design. It supersedes the generic billing proposals below; implementation requires explicit approval.
 
 **Community chat update:** The [community chat plan](community-chat.md) specifies the proposed shared floating widget, API, moderation and prerequisites. It supersedes the generic chat proposals in this historical plan; the widget shell is available as a non-persistent preview, but live chat is not implemented.
@@ -160,13 +159,8 @@ The platform card now appends history in six-record batches through a Load more 
 
 The user-provided mobile history mockup now guides the recent-predictions cards: Week/date header, Pick tag, paired kits, team codes, score/odds/historical-rate summary, info dialog and result badge. The demo repository/API provide the additional metadata and initial/loaded rows share the same visual contract. One- and two-column card layouts apply up to 900px; see [platform-board.md](platform-board.md) for current details.
 
-
-
-
 ## Reviews planning update
 
 The [Reviews blueprint](reviews.md) proposes scope, architecture and delivery gates. The Reviews route now provides a non-interactive preview. Live functionality remains dependent on the unresolved policy decisions and foundations in the blueprint.
-
-
 
 **Support planning:** See the [Support blueprint](support.md) for the proposed help center, ticket lifecycle, security, integrations and delivery gates. Implementation has started with a searchable local-preview FAQ at `/support`; production ticketing depends on the foundations and policy decisions described in the blueprint.

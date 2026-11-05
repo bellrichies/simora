@@ -171,4 +171,3 @@ All decisions are **proposed**, requiring product and relevant discipline approv
 ## Preview implementation
 
 The /reviews route now renders a non-interactive preview with unavailable states. It has no review records, ratings, submission, API or moderation. The user authorized implementation; live capabilities remain dependent on the unresolved decisions and infrastructure above.
-

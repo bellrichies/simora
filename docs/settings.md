@@ -97,7 +97,7 @@ Versioned reads return strong ETags; updates require `If-Match`, with 428 if mis
 | PUT `/api/me/notification-preferences` | Complete optional matrix and `If-Match`; reject unsupported or mandatory changes; 200. | `notifications.updated` |
 | GET `/api/me/consents` | 200 registered purposes, latest decisions and notice versions. | Access per policy |
 | POST `/api/me/consent-events` | `{purpose,decision,notice_version}` and key; explicit registered purpose; 201 current result. | `consent.changed` |
-| POST `/api/me/privacy-requests` | `{type:"export"|"deletion",step_up_proof}` and key; 202 `{id,status}`; one active request per type/owner under lock. | `privacy.requested` |
+| POST `/api/me/privacy-requests` | `{type:"export"\|"deletion",step_up_proof}` and key; 202 `{id,status}`; one active request per type/owner under lock. | `privacy.requested` |
 | GET `/api/me/privacy-requests/{id}` | 200 owner-scoped status; export download needs separate authenticated, short-lived authorization. | Access per policy |
 
 Common errors: 400 malformed/unknown fields, 401 unauthenticated, 403 forbidden/CSRF/step-up, 404 absent or inaccessible, 409 state/idempotency conflict, 412 stale, 422 invalid input, 428 missing precondition, 429 with `Retry-After`, 503 unavailable. MFA, phone, avatar, deactivation, security activity and admin APIs require separate approved contracts. No user route can mutate global configuration.

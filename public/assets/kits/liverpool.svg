@@ -1,0 +1,13 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="180" height="190" viewBox="0 0 180 190">
+<defs>
+<linearGradient id="body" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9d0016"/><stop offset=".24" stop-color="#f51534"/><stop offset=".58" stop-color="#dc0827"/><stop offset=".8" stop-color="#eb1530"/><stop offset="1" stop-color="#a40018"/></linearGradient>
+<linearGradient id="fold" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff4462" stop-opacity=".35"/><stop offset=".5" stop-color="#810013" stop-opacity=".25"/><stop offset="1" stop-color="#e50024" stop-opacity="0"/></linearGradient>
+<pattern id="rib" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 0v4" stroke="#ff5a6a" stroke-opacity=".12"/></pattern>
+<filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-opacity=".45"/></filter>
+<clipPath id="shape"><path d="M62 17 45 23 27 34 9 72 36 84 47 62 44 172Q90 183 136 172L133 62 144 84 171 72 153 34 135 23 118 17Q90 32 62 17Z"/></clipPath>
+</defs>
+<g filter="url(#shadow)"><path d="M62 17 45 23 27 34 9 72 36 84 47 62 44 172Q90 183 136 172L133 62 144 84 171 72 153 34 135 23 118 17Q90 32 62 17Z" fill="url(#body)" stroke="#fa2941" stroke-width=".7"/>
+<g clip-path="url(#shape)"><path d="M61 30Q53 90 55 175M74 36Q69 96 71 177M111 34Q123 103 119 176M134 51Q124 94 134 170" fill="none" stroke="url(#fold)" stroke-width="8"/><path d="M35 26 43 54 24 76M145 27 138 53 157 76" fill="none" stroke="#ff4c5b" stroke-opacity=".32" stroke-width="1.2"/><path d="M45 60 46 166M134 60 135 166" stroke="#850014" stroke-opacity=".65"/><path d="M0 0h180v190H0z" fill="url(#rib)"/><path d="M45 169Q90 179 136 169" stroke="#ff5e6b" stroke-opacity=".35" fill="none"/>
+</g>
+<path d="M62 17Q68 39 90 39T118 17L114 19Q108 33 90 33T66 19Z" fill="#f4d644"/><path d="M65 18Q90 29 115 18Q112 32 90 32T65 18Z" fill="#540d13"/><path d="M10 70 36 81M145 81 170 70" stroke="#eee190" stroke-width="4"/><path d="M10 73 35 84M146 84 171 73" stroke="#f5fae1" stroke-width="1.6"/>
+</g></svg>

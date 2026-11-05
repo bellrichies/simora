@@ -1,0 +1,52 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const script = fs.readFileSync('public/assets/auto-trade.js', 'utf8');
+const storage = new Map();
+function page(platform, valid = true) {
+  const fields = Object.fromEntries(['platform', 'league', 'market', 'strategy', 'stake', 'stopLoss', 'profitTarget', 'session', 'lossControl', 'lossCount', 'lookback'].map(name => [name, { value: '', focus() {}, setCustomValidity(message) { this.error = message; }, addEventListener(_, fn) { this.change = fn; } }]));
+  fields.platform.value = platform;
+  fields.league.value = 'league-1';
+  fields.market.value = 'Over 2.5';
+  fields.stake.value = '500';
+  const status = { textContent: '' };
+  const button = { disabled: true };
+  const form = { dataset: { platform }, elements: { namedItem: name => fields[name] }, querySelector: () => button,
+    reportValidity: () => valid, addEventListener: (_, callback) => { form.submit = callback; } };
+  const sessionStorage = { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) };
+  const settings = { hidden: true };
+  const displays = { 'trade-loss-count-value': {}, 'trade-lookback-value': {}, 'trade-loss-error': {} };
+  vm.runInNewContext(script, { document: { getElementById: id => id === 'trade-draft-form' ? form : id === 'trade-loss-settings' ? settings : displays[id] || status }, sessionStorage });
+  return { form, fields, status, button };
+}
+const first = page('sportybet');
+assert.equal(first.button.disabled, false);
+first.form.submit({ preventDefault() {} });
+assert.match(first.status.textContent, /not active/);
+assert.equal(page('sportybet').fields.stake.value, '500');
+const changedMarket = JSON.parse(storage.get('simora.auto-trade.preview.v1.sportybet'));
+changedMarket.market = 'Under 2.5';
+storage.set('simora.auto-trade.preview.v1.sportybet', JSON.stringify(changedMarket));
+assert.equal(page('sportybet').fields.market.value, 'Over 2.5', 'Board market overrides saved context');
+assert.equal(page('betking').fields.stake.value, '500'); // Its own initial value, not the saved draft.
+const other = page('betking');
+other.fields.stake.value = '900';
+other.fields.lossControl.checked = true;
+other.fields.lossControl.change();
+other.fields.lossCount.value = '2';
+other.fields.lookback.value = '5';
+other.form.submit({ preventDefault() {} });
+assert.equal(page('betking').fields.lossControl.checked, true);
+assert.equal(page('betking').fields.lossCount.value, '2');
+other.fields.lossCount.value = '6';
+other.form.submit({ preventDefault() {} });
+assert.match(other.fields.lossCount.error, /cannot exceed/);
+assert.equal(page('betking').fields.lossCount.value, '2');
+assert.equal(page('sportybet').fields.stake.value, '500');
+const invalid = page('sportybet', false);
+invalid.fields.stake.value = '-1';
+invalid.form.submit({ preventDefault() {} });
+assert.match(invalid.status.textContent, /highlighted/);
+assert.equal(page('sportybet').fields.stake.value, '500');
+console.log('Auto Trade preview draft tests passed');

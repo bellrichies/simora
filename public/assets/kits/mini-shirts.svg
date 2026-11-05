@@ -1,0 +1,19 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<path id="shirt" d="M8 2 4 3 0.8 8l4 2L6 7v17h12V7l1.2 3 4-2L20 3l-4-1q-4 4-8 0Z"/>
+<pattern id="redwhite" width="6" height="26" patternUnits="userSpaceOnUse"><path fill="#e9ece5" d="M0 0h6v26H0z"/><path fill="#d51f34" d="M0 0h3v26H0z"/></pattern>
+<pattern id="bluewhite" width="6" height="26" patternUnits="userSpaceOnUse"><path fill="#eceee7" d="M0 0h6v26H0z"/><path fill="#1766c6" d="M0 0h3v26H0z"/></pattern>
+<pattern id="redblack" width="6" height="26" patternUnits="userSpaceOnUse"><path fill="#171c21" d="M0 0h6v26H0z"/><path fill="#db2134" d="M0 0h3v26H0z"/></pattern>
+<pattern id="goldblack" width="6" height="26" patternUnits="userSpaceOnUse"><path fill="#f7af26" d="M0 0h6v26H0z"/><path fill="#282c29" d="M0 0h2v26H0z"/></pattern>
+<pattern id="redblue" width="10" height="26" patternUnits="userSpaceOnUse"><path fill="#155fba" d="M0 0h10v26H0z"/><path fill="#da2c38" d="M0 0h5v26H0z"/></pattern>
+</defs>
+<symbol id="white" viewBox="0 0 24 26"><use href="#shirt" fill="#e9eee7"/><path d="M8 2q4 4 8 0" fill="none" stroke="#899fa7" stroke-width="1.3"/></symbol>
+<symbol id="blue" viewBox="0 0 24 26"><use href="#shirt" fill="#1764be"/><path d="M8 2q4 4 8 0" fill="none" stroke="#ecf2e9" stroke-width="1.3"/></symbol>
+<symbol id="red" viewBox="0 0 24 26"><use href="#shirt" fill="#df2335"/><path d="M8 2q4 4 8 0" fill="none" stroke="#f6e6c1" stroke-width="1.3"/></symbol>
+<symbol id="claret" viewBox="0 0 24 26"><use href="#shirt" fill="#7c2d53"/><path d="m4 3 4-1-2 6-1.2 2-4-2ZM20 3l-4-1 2 6 1.2 2 4-2Z" fill="#80c6dc"/></symbol>
+<symbol id="orange" viewBox="0 0 24 26"><use href="#shirt" fill="#ef8236"/></symbol>
+<symbol id="gold" viewBox="0 0 24 26"><use href="#shirt" fill="url(#goldblack)"/></symbol>
+<symbol id="red-white" viewBox="0 0 24 26"><use href="#shirt" fill="url(#redwhite)"/></symbol>
+<symbol id="blue-white" viewBox="0 0 24 26"><use href="#shirt" fill="url(#bluewhite)"/></symbol>
+<symbol id="red-black" viewBox="0 0 24 26"><use href="#shirt" fill="url(#redblack)"/></symbol>
+<symbol id="red-blue" viewBox="0 0 24 26"><use href="#shirt" fill="url(#redblue)"/></symbol>
+</svg>

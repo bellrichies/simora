@@ -1,0 +1,6 @@
+{
+    "schema_version": 2,
+    "account": {"name": "Preview account", "initial": "D", "plan": "Free", "wallet_minor": 0, "active_plans": 0, "referrals": 0},
+    "quota": {"used": 3, "limit": 10},
+    "activity": [{"title": "Welcome to Simora", "description": "Explore the sample prediction data.", "time_label": "Example activity"}]
+}

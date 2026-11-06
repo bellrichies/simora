@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Simora model comparison">
+    <description>PSR-12 checks for phase 6B PHP policies and tests.</description>
+    <rule ref="PSR12"/>
+    <file>src/Domain/ModelComparison</file>
+    <file>src/Contracts/ChampionRepository.php</file>
+    <file>src/Contracts/ChampionStore.php</file>
+    <file>src/Repositories/UnavailableChampionRepository.php</file>
+    <file>src/Services/ChampionDecisionService.php</file>
+    <file>tests/ModelComparisonTest.php</file>
+    <file>tests/Support/ChampionTestRepository.php</file>
+</ruleset>

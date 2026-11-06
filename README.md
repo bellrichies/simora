@@ -8,13 +8,16 @@ A server-rendered PHP dashboard with locally compiled Tailwind CSS. Account, act
 
 ## Run locally
 
-Requires PHP 8.1 or later. The compiled stylesheet and generated fixtures are included, so from the repository root in PowerShell run:
+Requires PHP 8.1 or later and Composer. The compiled stylesheet and generated fixtures are included, so from the repository root in PowerShell run:
 
 ```powershell
+composer install --no-interaction --prefer-dist
 php -S localhost:8000 -t public public/index.php
 ```
 
 Open <http://localhost:8000/dashboard>. Stop the server with Ctrl+C.
+
+For the isolated MySQL 8.4 database, secure local `.env`, migrations and verification, follow [local development setup](docs/local-development.md). The [scheduled virtual source assessment](docs/architecture/live-source-research.md) records verified source evidence and the provider approvals still required.
 
 ## Change styles
 
@@ -35,7 +38,7 @@ Overview and platform main content share a centered, 1,180px maximum-width conta
 
 The compact overview groups schedule information by platform, separately from predictions. Synthetic schedule countdowns show Closed for 30 seconds at kickoff and then automatically count down to the next configured slot. All platforms share their schedule source with the platform pages. Market pulse and model form are calculated from stored predictions. Account KPIs, notifications and quota use the account fixture. The reusable platform card supports loading, empty and unavailable states. The desktop sidebar can be collapsed; on smaller screens it opens as a menu. Bootstrap Icons are served locally.
 
-The sidebarâ€™s Platforms link opens the [platform selector](docs/platforms-page.md) at `/platforms`. Choose a platform and league to open the Predictions workspace.
+The sidebar's Platforms link opens the [platform selector](docs/platforms-page.md) at `/platforms`. Choose a platform and league to open the Predictions workspace.
 
 ## Platform prediction board
 
@@ -74,7 +77,6 @@ The proposed shared, collapsible chat widget and its backend, moderation and rol
 
 The /plans page lists the confirmed Trial, Standard, Pro and Max plan names. Confirmed prices and billing periods are shown; features, subscription management and payments are not connected; account and billing information is not live. See [the billing blueprint](docs/plans-billing.md) for prerequisites and open decisions.
 
-
 ## Referrals planning
 
 The [Referrals blueprint](docs/referrals.md) documents the proposed user journey, architecture, API, security and delivery phases. `/referrals` provides a non-interactive preview; accounts, referral links, activity and rewards are not connected. Live operation depends on program decisions and the account and billing foundations described in the blueprint.
@@ -83,12 +85,9 @@ The [Referrals blueprint](docs/referrals.md) documents the proposed user journey
 
 The [Wallet blueprint](docs/wallet.md) describes a proposed restricted subscription-credit module, ledger, integrations and approval gates. The /wallet page is a non-interactive preview; balances, transactions and credit operations are not connected. The overview balance remains fixture data.
 
-
 ## Reviews planning
 
 The [Reviews blueprint](docs/reviews.md) documents proposed scope, moderation, architecture and approval gates. The /reviews route provides a non-interactive preview; no review service is connected.
-
-
 
 ## Support planning
 

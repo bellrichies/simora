@@ -1,0 +1,38 @@
+name: SPE MLPE and BEVE numerical tests
+
+on:
+  pull_request:
+    paths:
+      - 'workers/models/**'
+      - 'src/Domain/MarketCatalog.php'
+      - '.github/workflows/model-tests.yml'
+  push:
+    paths:
+      - 'workers/models/**'
+      - 'src/Domain/MarketCatalog.php'
+      - '.github/workflows/model-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  numerical-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.12', '3.14']
+    env:
+      PYTHONPATH: workers/models
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: workers/models/requirements.txt
+      - run: python -m pip install --no-compile -r workers/models/requirements.txt
+      - run: python -m pip check
+      - run: python -m unittest discover -s workers/models/tests -v

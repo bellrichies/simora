@@ -1,0 +1,250 @@
+{
+    "verified_at": "2026-11-06T01:37:13Z",
+    "mysql_version": "8.4.13",
+    "timezone": "+00:00",
+    "table_count": 32,
+    "foreign_key_count": 39,
+    "verified_migrations": [
+        "000_schema_ledger",
+        "010_catalog",
+        "020_identity",
+        "030_source_provenance"
+    ],
+    "canonical_markets": 8,
+    "foreign_keys": [
+        {
+            "TABLE_NAME": "audit_logs",
+            "CONSTRAINT_NAME": "fk_audit_actor",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "collection_cursors",
+            "CONSTRAINT_NAME": "fk_cursor_batch",
+            "REFERENCED_TABLE_NAME": "ingestion_batches",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "collection_cursors",
+            "CONSTRAINT_NAME": "fk_cursor_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "collection_cursors",
+            "CONSTRAINT_NAME": "fk_cursor_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "collection_jobs",
+            "CONSTRAINT_NAME": "fk_job_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "collection_jobs",
+            "CONSTRAINT_NAME": "fk_job_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "data_quality_issues",
+            "CONSTRAINT_NAME": "fk_quality_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "data_quality_issues",
+            "CONSTRAINT_NAME": "fk_quality_match",
+            "REFERENCED_TABLE_NAME": "football_matches",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "data_quality_issues",
+            "CONSTRAINT_NAME": "fk_quality_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "email_verification_tokens",
+            "CONSTRAINT_NAME": "fk_verification_user",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "football_matches",
+            "CONSTRAINT_NAME": "fk_matches_away_scope",
+            "REFERENCED_TABLE_NAME": "teams",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "football_matches",
+            "CONSTRAINT_NAME": "fk_matches_home_scope",
+            "REFERENCED_TABLE_NAME": "teams",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "football_matches",
+            "CONSTRAINT_NAME": "fk_matches_round_scope",
+            "REFERENCED_TABLE_NAME": "virtual_rounds",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "ingestion_batches",
+            "CONSTRAINT_NAME": "fk_batch_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "ingestion_observations",
+            "CONSTRAINT_NAME": "fk_observation_mapping",
+            "REFERENCED_TABLE_NAME": "source_fixture_mappings",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "ingestion_observations",
+            "CONSTRAINT_NAME": "fk_observation_payload",
+            "REFERENCED_TABLE_NAME": "raw_source_payloads",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "league_seasons",
+            "CONSTRAINT_NAME": "fk_seasons_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "league_sync_metrics",
+            "CONSTRAINT_NAME": "fk_metrics_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "market_rules",
+            "CONSTRAINT_NAME": "fk_rules_market",
+            "REFERENCED_TABLE_NAME": "markets",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "CONSTRAINT_NAME": "fk_reset_user",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "raw_source_payloads",
+            "CONSTRAINT_NAME": "fk_payload_batch",
+            "REFERENCED_TABLE_NAME": "ingestion_batches",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "raw_source_payloads",
+            "CONSTRAINT_NAME": "fk_payload_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "role_permissions",
+            "CONSTRAINT_NAME": "fk_role_permissions_permission",
+            "REFERENCED_TABLE_NAME": "permissions",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "role_permissions",
+            "CONSTRAINT_NAME": "fk_role_permissions_role",
+            "REFERENCED_TABLE_NAME": "roles",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "sessions",
+            "CONSTRAINT_NAME": "fk_sessions_user",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "settings",
+            "CONSTRAINT_NAME": "fk_settings_owner",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "source_access_grants",
+            "CONSTRAINT_NAME": "fk_grant_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "source_fixture_mappings",
+            "CONSTRAINT_NAME": "fk_source_fixture_match",
+            "REFERENCED_TABLE_NAME": "football_matches",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "source_fixture_mappings",
+            "CONSTRAINT_NAME": "fk_source_fixture_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "source_league_mappings",
+            "CONSTRAINT_NAME": "fk_source_league_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "source_league_mappings",
+            "CONSTRAINT_NAME": "fk_source_league_source",
+            "REFERENCED_TABLE_NAME": "data_sources",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "team_aliases",
+            "CONSTRAINT_NAME": "fk_alias_team_scope",
+            "REFERENCED_TABLE_NAME": "teams",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "teams",
+            "CONSTRAINT_NAME": "fk_teams_league",
+            "REFERENCED_TABLE_NAME": "virtual_leagues",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "transactional_outbox",
+            "CONSTRAINT_NAME": "fk_outbox_batch",
+            "REFERENCED_TABLE_NAME": "ingestion_batches",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "user_roles",
+            "CONSTRAINT_NAME": "fk_user_roles_actor",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "user_roles",
+            "CONSTRAINT_NAME": "fk_user_roles_role",
+            "REFERENCED_TABLE_NAME": "roles",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "user_roles",
+            "CONSTRAINT_NAME": "fk_user_roles_user",
+            "REFERENCED_TABLE_NAME": "users",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "virtual_leagues",
+            "CONSTRAINT_NAME": "fk_virtual_leagues_platform",
+            "REFERENCED_TABLE_NAME": "platforms",
+            "DELETE_RULE": "NO ACTION"
+        },
+        {
+            "TABLE_NAME": "virtual_rounds",
+            "CONSTRAINT_NAME": "fk_rounds_season_scope",
+            "REFERENCED_TABLE_NAME": "league_seasons",
+            "DELETE_RULE": "NO ACTION"
+        }
+    ]
+}

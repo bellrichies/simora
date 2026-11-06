@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" cacheDirectory=".tools/phpunit-cache"
+         failOnWarning="true" failOnRisky="true" colors="true">
+    <testsuites>
+        <testsuite name="model-health">
+            <file>tests/ModelHealthTest.php</file>
+        </testsuite>
+        <testsuite name="model-comparison">
+            <file>tests/ModelComparisonTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

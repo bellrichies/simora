@@ -106,9 +106,9 @@ final class MigrationRunner
             $query->execute([$dependency]);
             $row = $query->fetch(PDO::FETCH_ASSOC);
             $path = $this->directory . DIRECTORY_SEPARATOR . $dependency . '.sql';
-            $checksum = is_file($path) ? hash_file('sha256', $path) : false;
-            if ($row === false || $row['status'] !== 'succeeded' || !is_string($checksum)
-                || !hash_equals($row['checksum'], $checksum)) {
+            $dependencyChecksum = is_file($path) ? hash_file('sha256', $path) : false;
+            if ($row === false || $row['status'] !== 'succeeded' || !is_string($dependencyChecksum)
+                || !hash_equals($row['checksum'], $dependencyChecksum)) {
                 throw new RuntimeException('Missing, failed or mismatched dependency: ' . $dependency);
             }
         }

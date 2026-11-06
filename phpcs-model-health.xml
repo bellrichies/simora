@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="Simora model health">
+    <description>PSR-12 checks for phase 5D PHP sources and tests.</description>
+    <rule ref="PSR12"/>
+    <file>src/Domain/ModelHealth</file>
+    <file>src/Contracts/ModelOperationsRepository.php</file>
+    <file>src/Contracts/ModelOperationsStore.php</file>
+    <file>src/Repositories/UnavailableModelOperationsRepository.php</file>
+    <file>src/Services/ModelHealthService.php</file>
+    <file>tests/ModelHealthTest.php</file>
+    <file>tests/Support/ModelOperationsTestRepository.php</file>
+    <file>tests/Support/ModelHealthTestClock.php</file>
+</ruleset>

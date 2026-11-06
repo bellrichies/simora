@@ -1,0 +1,52 @@
+name: Model health policy tests
+
+on:
+  pull_request:
+    paths:
+      - 'src/Domain/ModelHealth/**'
+      - 'src/Services/ModelHealthService.php'
+      - 'src/Contracts/ModelOperations*.php'
+      - 'src/Repositories/UnavailableModelOperationsRepository.php'
+      - 'tests/ModelHealthTest.php'
+      - 'tests/Support/Model*'
+      - 'composer.*'
+      - 'phpunit.xml.dist'
+      - 'phpcs-model-health.xml'
+      - '.github/workflows/model-health-tests.yml'
+  push:
+    paths:
+      - 'src/Domain/ModelHealth/**'
+      - 'src/Services/ModelHealthService.php'
+      - 'src/Contracts/ModelOperations*.php'
+      - 'src/Repositories/UnavailableModelOperationsRepository.php'
+      - 'tests/ModelHealthTest.php'
+      - 'tests/Support/Model*'
+      - 'composer.*'
+      - 'phpunit.xml.dist'
+      - 'phpcs-model-health.xml'
+      - '.github/workflows/model-health-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  policies:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.2']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_mysql, dom, mbstring, xml, xmlwriter
+          coverage: none
+          tools: composer:v2
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer validate --strict
+      - run: composer lint:model-health
+      - run: composer test:model-health
+      - run: php tests/catalog.php

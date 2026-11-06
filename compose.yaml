@@ -1,0 +1,36 @@
+name: simora-local
+services:
+  mysql:
+    image: mysql:8.4@sha256:a81d043930e51745522bd5c430961cf8286f0a23f0a9a2a6e0108f7ea71b0902
+    ports:
+      - "127.0.0.1:33080:3306"
+    environment:
+      MYSQL_DATABASE: simora_dev
+      MYSQL_USER: simora_migrator
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_migration_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_ROOT_HOST: localhost
+      TZ: UTC
+    command: ["--default-time-zone=+00:00", "--local-infile=OFF"]
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/01-app-user.sh:/docker-entrypoint-initdb.d/01-app-user.sh:ro
+    secrets:
+      - mysql_root_password
+      - mysql_migration_password
+      - mysql_app_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--protocol=tcp", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+secrets:
+  mysql_root_password:
+    file: ./.secrets/mysql-root-password
+  mysql_migration_password:
+    file: ./.secrets/mysql-migration-password
+  mysql_app_password:
+    file: ./.secrets/mysql-app-password
+volumes:
+  mysql_data:

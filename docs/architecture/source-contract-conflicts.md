@@ -1,5 +1,7 @@
 # Source and contract conflicts
 
+Historical baseline audit. Subsequent work added all eight canonical market helpers, a migration runner, identity/ingestion primitives, Composer/dotenv and isolated local MySQL 8.4.13. See `live-source-phase.md`, `local-database-verification.json` and `../local-development.md` for current verification. Statements below describe the initial audit and must not be treated as the current feature inventory. No provider access or production backend capability is established by these additions.
+
 Status: audit, 2026-11-06. The user designated `docs/SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md` as authoritative for implementation. `AGENTS.md` instead names `docs/architecture/SIMORA_BACKEND_BLUEPRINT.md`, which is absent; the tracked `docs/SIMORA_BACKEND_BLUEPRINT.md` is deleted in the existing working tree. This is a source-of-truth conflict, not evidence the deleted file should be restored. V4 supersedes older design documents; preserve current interfaces until a separately approved phase provides adapters.
 
 | Subject | Observed contract | V4 target / disposition |

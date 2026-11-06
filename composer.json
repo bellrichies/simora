@@ -1,0 +1,28 @@
+{
+    "name": "simora/backend",
+    "type": "project",
+    "description": "Simora virtual football analytics backend",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.1",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"SimoraTests\\": "tests/"}
+    },
+    "scripts": {
+        "test:model-health": "phpunit --configuration phpunit.xml.dist --testsuite model-health",
+        "lint:model-health": "phpcs --standard=phpcs-model-health.xml",
+        "test:model-comparison": "phpunit --configuration phpunit.xml.dist --testsuite model-comparison",
+        "lint:model-comparison": "phpcs --standard=phpcs-model-comparison.xml"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=10.5 <11.0",
+        "squizlabs/php_codesniffer": ">=3.13 <5"
+    }
+}

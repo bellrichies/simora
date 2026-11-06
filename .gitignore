@@ -1,1 +1,11 @@
 node_modules/
+vendor/
+.env
+.env.*
+!.env.example
+.secrets/
+storage/private/
+.venv-models/
+__pycache__/
+*.pyc
+.tools/

@@ -11,11 +11,7 @@ if (PHP_SAPI === 'cli-server') {
     }
 }
 
-spl_autoload_register(static function (string $class): void {
-    if (str_starts_with($class, 'App\\')) {
-        require dirname(__DIR__) . '/src/' . str_replace('\\', '/', substr($class, 4)) . '.php';
-    }
-});
+require dirname(__DIR__) . '/bootstrap.php';
 
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
 $settings = require dirname(__DIR__) . '/config/app.php';

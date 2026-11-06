@@ -121,7 +121,7 @@ All mutations require a bounded `Idempotency-Key`, scoped to principal and opera
 | GET `/api/admin/support/tickets` and `/tickets/{id}` | `support.queue.read`; allowlisted status, category, priority, assignee, escalation, dates, reference, cursor/limit; 200 scoped queue/detail. |
 | GET `/api/admin/support/tickets/{id}/messages` | Queue read; internal notes additionally require `support.notes.read`. |
 | POST `/api/admin/support/tickets/{id}/messages` | `support.reply` or `support.notes.write`; `{visibility,body,attachment_ids,version}`; 201; internal notes generate no customer notice. |
-| POST `/api/admin/support/tickets/{id}/assignment` | `support.assign`; `{agent_id:null|string,reason,version}`; 200; eligible active assignee only. |
+| POST `/api/admin/support/tickets/{id}/assignment` | `support.assign`; `{agent_id:null\| string,reason,version}`; 200; eligible active assignee only. |
 | POST `/api/admin/support/tickets/{id}/priority` | `support.priority`; `{priority,reason,version}`; 200; validate policy. |
 | POST `/api/admin/support/tickets/{id}/transition` | `support.transition`; `{action,reason,public_resolution?,version}`; 200; apply matrix. |
 | POST `/api/admin/support/tickets/{id}/escalations` | `support.escalate`; `{destination,reason,version}`; 201; configured authorized destination. |

@@ -22,6 +22,7 @@ foreach ($points as $index => $point) {
 }
 ?>
 <div class="page-container board prediction-board">
+    <?php require __DIR__ . '/components/model-access.php'; ?>
     <div class="board-notice"><i class="bi bi-info-circle" aria-hidden="true"></i>
         <span><?php if ($details['upgraded']): ?>Pro access preview. Additional analyses are enabled for this local demo.<?php else: ?><?= e($dashboard['account']['plan']) ?> plan: <?= $details['quota']['used'] ?>/<?= $details['quota']['limit'] ?> prediction analyses used today. Upgrade for higher daily limits and additional analytics.<?php endif ?></span>
         <button type="button" class="upgrade-link" data-dialog="board-upgrade-dialog"><?= $details['upgraded'] ? 'Manage preview' : 'Upgrade' ?></button>
@@ -54,7 +55,7 @@ foreach ($points as $index => $point) {
             </header>
             <?php if ($details['pick']): ?>
                 <?php require __DIR__ . '/components/match-pick.php'; ?>
-            <?php else: ?><div class="board-empty"><strong>No prediction available</strong></div><?php endif ?>
+            <?php else: ?><div class="board-empty"><strong>No prediction available</strong><p>No stored selection or odds exist for this market. No substitute pick is shown.</p></div><?php endif ?>
             <div class="trade-entry">
                 <div class="trade-entry-copy"><span class="trade-entry-icon"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i></span><div><strong>Auto Trade <span class="trade-entry-badge">PREVIEW</span></strong><p>Plan a strategy for <?= e($platform['name']) ?> using this market.</p></div></div>
                 <button class="trade-entry-button" type="button" data-dialog="auto-trade-dialog" aria-haspopup="dialog">Configure <i class="bi bi-arrow-up-right" aria-hidden="true"></i></button>
@@ -67,10 +68,10 @@ foreach ($points as $index => $point) {
                 <noscript><button type="submit" class="filter-apply">Run simulation</button></noscript>
             </form>
             <p class="board-subtitle" id="simulation-description">Simulates how the model would have performed with your stake size on past demo weeks.</p>
-            <p id="simulation-result" class="simulation-result" role="status" data-negative="<?= $details['simulation']['net_minor'] < 0 ? 'true' : 'false' ?>"><?php if ($details['stake_error']): ?>Enter a stake from <?= $money($limits['min_minor']) ?> to <?= $money($limits['max_minor']) ?>. Showing the default <?= $money($limits['default_minor']) ?> simulation.<?php else: ?>Net result: <?= $money($details['simulation']['net_minor']) ?> <span>&middot; <?= $details['simulation']['roi'] ?>% ROI</span><?php endif ?></p>
+            <p id="simulation-result" class="simulation-result" role="status" data-negative="<?= $details['simulation']['net_minor'] < 0 ? 'true' : 'false' ?>"><?php if ($details['won'] + $details['lost'] === 0): ?>No settled selections are available for a simulation.<?php elseif ($details['stake_error']): ?>Enter a stake from <?= $money($limits['min_minor']) ?> to <?= $money($limits['max_minor']) ?>. Showing the default <?= $money($limits['default_minor']) ?> simulation.<?php else: ?>Net result: <?= $money($details['simulation']['net_minor']) ?> <span>&middot; <?= $details['simulation']['roi'] ?>% ROI</span><?php endif ?></p>
         </section>
         <section class="board-panel performance" aria-labelledby="performance-heading"><div class="board-panel-heading"><h3 id="performance-heading"><i class="bi bi-bar-chart-fill" aria-hidden="true"></i> Model Performance</h3><span class="board-tag">Historical simulation</span></div>
-            <div class="performance-box"><div class="performance-values"><span class="wins"><strong><?= $details['won'] ?></strong> won</span><span class="losses"><strong><?= $details['lost'] ?></strong> lost</span><span><strong><?= $details['hit_rate'] ?>%</strong> hit rate</span></div>
+            <div class="performance-box"><div class="performance-values"><span class="wins"><strong><?= $details['won'] ?></strong> won</span><span class="losses"><strong><?= $details['lost'] ?></strong> lost</span><span><strong><?= $details['won'] + $details['lost'] > 0 ? $details['hit_rate'] . '%' : 'Unavailable' ?></strong> hit rate</span></div>
                 <svg class="performance-chart" viewBox="0 0 420 68" preserveAspectRatio="none" role="img" aria-labelledby="chart-title"><title id="chart-title">Cumulative demo profit for <?= e($details['market']) ?> across <?= $details['won'] + $details['lost'] ?> settled examples</title><path class="chart-area" d="M0,68 L<?= implode(' L', $coordinates) ?> L420,68 Z"/><polyline points="<?= implode(' ', $coordinates) ?>" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
             </div><p class="performance-note"><i class="bi bi-info-circle" aria-hidden="true"></i><span><?= e($details['source']['notice'] ?? 'No performance data available.') ?></span></p>
         </section>

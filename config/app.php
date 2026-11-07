@@ -11,9 +11,11 @@ return [
     'default_market' => 'under_25',
     'markets' => [
         ['id' => 'over_15', 'label' => 'Over 1.5'],
+        ['id' => 'under_15', 'label' => 'Under 1.5'],
         ['id' => 'over_25', 'label' => 'Over 2.5'],
         ['id' => 'under_25', 'label' => 'Under 2.5'],
         ['id' => 'under_35', 'label' => 'Under 3.5'],
+        ['id' => 'over_35', 'label' => 'Over 3.5'],
         ['id' => 'btts_yes', 'label' => 'BTTS Yes'],
         ['id' => 'btts_no', 'label' => 'BTTS No'],
     ],

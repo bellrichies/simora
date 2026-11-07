@@ -11,6 +11,12 @@ final class DemoDatasetGenerator
 {
     public function generate(string $slug, array $platform, array $settings, int $seed, \DateTimeImmutable $asOf): array
     {
+        // Freeze the legacy UI fixture profile; adding a supported market must not invent history or odds.
+        $legacy = ['over_15', 'over_25', 'under_25', 'under_35', 'btts_yes', 'btts_no'];
+        $settings['markets'] = array_values(array_filter(
+            $settings['markets'],
+            static fn (array $market): bool => in_array($market['id'], $legacy, true)
+        ));
         $definitions = [
             'england' => 'England League', 'italy' => 'Italy League', 'spain' => 'Spain League',
             'germany' => 'Germany League', 'france' => 'France League', 'turkey' => 'Turkey League',

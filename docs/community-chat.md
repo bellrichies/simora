@@ -1,6 +1,16 @@
 # General community chat widget
 
-Status: the shared floating widget is implemented as a local, non-persistent preview. Live messaging, authentication, persistence and moderation remain unimplemented. This specification defines the remaining feature and implementation plan. Product policy choices marked **Decision needed** must be resolved before public release.
+## Phase 11 implementation and launch boundary — 2026-11-06
+
+The [master V4 blueprint](SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md) is authoritative; earlier suggested extra event/report tables and unversioned API paths below are historical proposals. Preserve the **shared general community discussion** scope. The user's suggested authenticated support chat and Max priority routing are not approved replacements. Support remains the private ticket workflow.
+
+Optional backend infrastructure now uses only canonical `chat_rooms`, `chat_memberships`, `chat_messages` plus protected shared audit records. It is disabled by default, with no seeded room/messages or transmission from the existing widget. Enabling requires explicit unexpired policy/privacy/moderation/retention references, **named moderation and privacy owners**, reporting/abuse-response and rights/deletion procedures, deliberate permissions and room opening. Proposed 90-day retention remains subject to approval; no automatic retention/erasure schedule is invented.
+
+The server enforces verified authors, explicit current-policy membership consent, independent human premoderation, no author names/IDs in the normal feed, protected reporting without reporter disclosure, staff bans/mutes that rejoining cannot reset, bounded plain text, no rich links/uploads, shared transactional rate limits and audited state changes. Pending/hidden content is excluded from normal snapshots. Snapshot clients must replace their rendered visible window; there is no event-sequence/reconnect protocol or enabled live widget yet. Reports do not automatically hide content or imply a fraud finding.
+
+No direct messages, per-user block list, automatic account punishment, AI responses, external notifications or SLA is implemented. Members can report; deletion/privacy requests use owner-bound support tickets categorized `privacy_security`, restricted to approved privacy staff. Staffed reporting/appeal workflow, per-user blocking design if required, retention/rights execution, edge flood controls, security/load and live integration checks remain launch gates. See [Phase 11 report](architecture/experience-phase.md). Demo controls remain labeled and non-transmitting.
+
+Historical preview assessment: the shared floating widget is local and non-persistent. The gated backend added in Phase 11 is described above; the historical design below is not a claim that those services or launch policies were already operational. Product policy choices marked **Decision needed** remain unresolved before release.
 
 ## Goal and scope
 

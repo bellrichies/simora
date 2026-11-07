@@ -1,4 +1,12 @@
-# Referrals module architecture and implementation blueprint
+# Referrals module notes
+
+## Phase 11 authority and release boundary — 2026-11-06
+
+The [master V4 blueprint](SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md) is authoritative. Historical schemas and route sketches below are proposals, not a second backend blueprint. The user explicitly reconfirmed that the existing **10% referee discount, 20% referrer credit capped at NGN2,000, 30-day attribution and 90-day qualification window** remain unapproved proposals. Preserve them for commercial validation; the alternative 5% credit, five rewards/month and 90-day expiry recommendations do not replace them or create a merged policy. The 14-day hold, consent, eligibility, credit use, fraud evidence/reversal and expiry details still require approval.
+
+Current server implementation: authenticated owner-only code creation/read and registered-count projection, behind disabled approval/feature gates; codes are opaque random tokens and never embed identity. No referrer/referred names, email, IP/device fingerprints or activity rows are exposed. No visitor click capture, cookies, registration attribution, paid conversion, discount, reward, expiry job, redemption, reversal or payout is enabled. Canonical `referral_attributions` and `referral_rewards` define relationships without seeding obligations; rewards cannot enter a settled state in this schema. No demo data is imported.
+
+Release requires approved immutable program terms, consent-aware registration integration, duplication/fraud review and appeal procedures, account eligibility and relevant financial/privacy operations. Self-referrals are prohibited by a DB CHECK; unique referred-user and registration-reference keys prevent multiple attribution records, but their presence is not a complete duplicate-account detector. [Phase 11 implementation report](architecture/experience-phase.md) records code/tests and remaining gates. The SSR demo remains non-tracking and illustrative.
 
 Status: **interactive, data-driven demo page implemented**. Live program rules and the account and billing foundations remain unresolved. All API routes, models, state names and live controls below are proposals, not existing functionality or approved commercial policy. This document complements [Plans & Billing](plans-billing.md), [community chat](community-chat.md), [data contract](data-contract.md) and the [implementation plan](implementation-plan.md). The user's task and confirmed project documentation take precedence over these recommendations.
 

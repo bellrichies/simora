@@ -13,6 +13,7 @@ $localDate = static fn (string $value): string => (new DateTimeImmutable($value)
 ?>
 <link rel="stylesheet" href="/assets/predictions.css"><script src="/assets/predictions.js" defer></script>
 <div class="page-container ph-page" data-predictions-hub>
+<?php require __DIR__ . '/components/model-access.php'; ?>
 <header class="ph-header"><div><p class="ph-eyebrow">EXPLORE PREDICTIONS</p><h2><?= e($preview['name'] ?? 'Predictions') ?>. <span>A clearer view of every pick.</span></h2><p>Choose your market. Explore the prediction. Test your strategy.</p></div><a class="ph-back" href="<?= e($platformsUrl) ?>"><i class="bi bi-arrow-left" aria-hidden="true"></i> All platforms</a></header>
 <div class="ph-notice"><i class="bi bi-info-circle" aria-hidden="true"></i><p>Synthetic demo data. Historical simulations do not predict future returns.</p><span>SAMPLE DATA</span></div>
 <?php if ($preview): ?>

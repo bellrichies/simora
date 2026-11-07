@@ -15,6 +15,11 @@ final class MigrationRunner
         '010_catalog' => ['000_schema_ledger'],
         '020_identity' => ['000_schema_ledger'],
         '030_source_provenance' => ['010_catalog'],
+        '080_access_notifications' => ['020_identity'],
+        '081_approved_access_policy' => ['080_access_notifications'],
+        '090_payments_wallet_gated' => ['081_approved_access_policy', '030_source_provenance'],
+        '100_experience_gated' => ['090_payments_wallet_gated'],
+        '110_chat_optional' => ['100_experience_gated', '010_catalog'],
     ];
 
     public function __construct(private PDO $connection, private string $directory)
@@ -121,11 +126,34 @@ final class MigrationRunner
             '030_source_provenance' => ['data_sources', 'source_access_grants', 'source_league_mappings',
                 'source_fixture_mappings', 'raw_source_payloads', 'ingestion_observations', 'collection_jobs',
                 'collection_cursors', 'ingestion_batches', 'transactional_outbox', 'data_quality_issues', 'league_sync_metrics'],
+            '080_access_notifications' => ['plans', 'plan_versions', 'plan_prices', 'subscriptions',
+                'subscription_events', 'entitlements', 'usage_counters', 'usage_events',
+                'notifications', 'notification_outbox'],
+            '081_approved_access_policy' => [],
+            '090_payments_wallet_gated' => ['invoices', 'payments', 'payment_webhooks', 'refunds',
+                'wallet_accounts', 'wallet_journals', 'wallet_postings', 'wallet_balances', 'wallet_adjustments'],
+            '100_experience_gated' => ['referral_codes', 'referral_attributions', 'referral_rewards', 'reviews',
+                'review_moderation', 'support_tickets', 'support_messages', 'faq_articles'],
+            '110_chat_optional' => ['chat_rooms', 'chat_memberships', 'chat_messages'],
             default => throw new RuntimeException('Unsupported migration.'),
         };
         foreach ($tables as $table) {
             if ($this->tableExists($table)) {
                 throw new RuntimeException('Existing table ' . $table . ' requires reconciliation; no DDL for ' . $id . ' applied.');
+            }
+        }
+        if ($id === '080_access_notifications') {
+            $column = $this->connection->query("SELECT COUNT(*) FROM information_schema.columns "
+                . "WHERE table_schema=DATABASE() AND table_name='sessions' AND column_name='csrf_token_hash'");
+            if ((int) $column->fetchColumn() !== 0) {
+                throw new RuntimeException('Existing session CSRF column requires reconciliation before access migration.');
+            }
+        }
+        if ($id === '081_approved_access_policy') {
+            $column = $this->connection->query("SELECT COUNT(*) FROM information_schema.columns "
+                . "WHERE table_schema=DATABASE() AND table_name='plan_versions' AND column_name='approval_kind'");
+            if ((int) $column->fetchColumn() !== 0) {
+                throw new RuntimeException('Existing policy approval columns require reconciliation before DDL.');
             }
         }
         $started = microtime(true);

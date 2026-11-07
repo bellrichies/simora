@@ -1,4 +1,8 @@
-# Plans & Billing implementation blueprint
+# Historical Plans & Billing preview notes
+
+Phase 11 clarification (2026-11-06): referral discounts and non-cash referral credits remain **unapproved commercial proposals**. No referral adjustment reaches Paystack quotes, verified payment activation or the subscription-credit ledger. Preserve proposed 10% discount/20% capped referrer credit in `referrals.md`; do not substitute the alternative 5% recommendation. Tax/fee bases, rounding, 14-day dispute hold, refund/reversal recovery, expiry and redemption need approved policy and tested ledger integration. There are no referral payouts or Max priority-support entitlements. Existing approved subscription prices/allocations and disabled trading execution remain unchanged.
+
+> Historical preview document, not an alternate backend blueprint. Its proposed tables, APIs and unresolved-plan statements below are superseded by [the authoritative V4 blueprint](SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md), the approved V1 access policy, and its approved Paystack/subscription-credit scope. Preserve the SSR preview; do not implement the competing schema proposed here.
 
 Status: **data-driven frontend preview implemented; live billing remains gated by the decisions below**. This is the detailed billing design for the existing [implementation plan](implementation-plan.md). Confirmed facts and product decisions are distinguished from proposed engineering defaults below. The user has confirmed the prices and durations below; no payment provider or entitlements have been specified.
 

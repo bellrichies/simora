@@ -43,6 +43,13 @@ foreach ($catalog as $slug => $platform) {
     foreach ($snapshot['leagues'] as $league) {
         foreach ($settings['markets'] as $market) {
             $selected = $service->getDetails($slug, ['league' => $league['id'], 'market' => $market['label'], 'show' => '999999']);
+            if (in_array($market['id'], ['under_15', 'over_35'], true)) {
+                $check($selected['total'] === 0 && $selected['picks'] === [] && $selected['pick'] === null,
+                    'Additional canonical markets retain empty histories without invented picks');
+                $check($selected['market'] === $market['label'] && $selected['league']['id'] === $league['id'],
+                    'Additional markets preserve the requested league and market');
+                continue;
+            }
             $check($selected['total'] === 120 && $selected['week']['league_id'] === $league['id'], 'League history and schedule');
             $check(count($selected['picks']) === 2 && $selected['pick']['league_id'] === $league['id'], 'League preview');
             $check($selected['pick']['historical_sample_size'] === 160, 'League-specific evidence');
@@ -52,6 +59,9 @@ foreach ($catalog as $slug => $platform) {
         }
     }
     foreach ($settings['markets'] as $market) {
+        if (in_array($market['id'], ['under_15', 'over_35'], true)) {
+            continue;
+        }
         $all = $service->getDetails($slug, ['market' => $market['label'], 'show' => '999999']);
         $check(count($all['history']) === 120 && $all['won'] >= 102 && $all['won'] <= 108, 'High-performance demo profile');
         $check($all['won'] + $all['lost'] === $all['total'] && $all['next_page'] === null, 'Derived totals and exhaustion');

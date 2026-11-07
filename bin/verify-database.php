@@ -15,6 +15,47 @@ try {
     }
     $ledger = $pdo->query('SELECT id, checksum, status FROM schema_migrations ORDER BY id')->fetchAll();
     $expected = ['000_schema_ledger', '010_catalog', '020_identity', '030_source_provenance'];
+    if (in_array('080_access_notifications', array_column($ledger, 'id'), true)) {
+        $expected[] = '080_access_notifications';
+        $csrf = $pdo->query("SELECT column_type,is_nullable FROM information_schema.columns "
+            . "WHERE table_schema=DATABASE() AND table_name='sessions' AND column_name='csrf_token_hash'")->fetch();
+        if ($csrf === false || $csrf['COLUMN_TYPE'] !== 'binary(32)' || $csrf['IS_NULLABLE'] !== 'YES') {
+            throw new RuntimeException('Session CSRF digest column differs from access migration.');
+        }
+    }
+    if (in_array('081_approved_access_policy', array_column($ledger, 'id'), true)) {
+        $expected[] = '081_approved_access_policy';
+        $policyQuery = $pdo->prepare('SELECT p.code,v.features,v.approved_by,v.approval_kind,'
+            . 'CAST(r.amount_minor AS CHAR) AS amount_minor,r.interval_code FROM plan_versions v '
+            . 'JOIN plans p ON p.id=v.plan_id JOIN plan_prices r ON r.plan_version_id=v.id '
+            . 'WHERE v.approval_reference=? ORDER BY p.code');
+        $policyQuery->execute([App\Domain\Access\PlanPolicy::APPROVAL]);
+        $policyRows = $policyQuery->fetchAll();
+        if (count($policyRows) !== 4 || count(array_unique(array_column($policyRows, 'code'))) !== 4) {
+            throw new RuntimeException('Approved policy catalog is incomplete or duplicated.');
+        }
+        foreach ($policyRows as $policyRow) {
+            $snapshot = json_decode($policyRow['features'], true, 32, JSON_THROW_ON_ERROR);
+            $policy = App\Domain\Access\PlanPolicy::verify($snapshot);
+            $interval = match ($policy['code']) {
+                'trial' => 'day', 'standard' => 'two_weeks', default => 'thirty_days',
+            };
+            if ($policyRow['code'] !== $policy['code'] || $policyRow['approved_by'] !== null
+                || $policyRow['approval_kind'] !== 'documented_product'
+                || $policyRow['amount_minor'] !== (string) $policy['amount_minor']
+                || $policyRow['interval_code'] !== $interval) {
+                throw new RuntimeException('Approved policy price or approval provenance differs.');
+            }
+        }
+    }
+    if (in_array('090_payments_wallet_gated', array_column($ledger, 'id'), true)) {
+        $expected[] = '090_payments_wallet_gated';
+    }
+    foreach (['100_experience_gated', '110_chat_optional'] as $experienceMigration) {
+        if (in_array($experienceMigration, array_column($ledger, 'id'), true)) {
+            $expected[] = $experienceMigration;
+        }
+    }
     if (array_column($ledger, 'id') !== $expected) {
         throw new RuntimeException('Unexpected or incomplete migration ledger.');
     }

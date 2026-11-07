@@ -2,5 +2,5 @@
 
 declare(strict_types=1);
 
-// Live billing is intentionally unavailable until an authenticated provider exists.
-return ['provider' => getenv('BILLING_PROVIDER') ?: 'mock'];
+// Existing SSR preview remains isolated from real payment records and provider operations.
+return ['provider' => 'paystack', 'preview_provider' => 'mock'];

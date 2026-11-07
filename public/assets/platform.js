@@ -34,6 +34,10 @@
   }).format(value / 100);
 
   const update = () => {
+    if (records.length === 0) {
+      output.textContent = 'No settled selections are available for a simulation.';
+      return;
+    }
     const value = stake.value.trim();
     if (!/^\d{1,7}(?:\.\d{1,2})?$/.test(value) || Number(value) * 100 < limits.min_minor || Number(value) * 100 > limits.max_minor) {
       stake.setAttribute('aria-invalid', 'true');

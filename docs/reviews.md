@@ -1,4 +1,10 @@
-# Reviews module architecture and implementation blueprint
+# Reviews module notes
+
+## Phase 11 current implementation — 2026-11-06
+
+The [master V4 blueprint](SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md) is authoritative. Historical design suggestions below are not another backend blueprint. The approved application-only, one-review-per-verified-account, 1–5-star, human-premoderation rules are implemented in gated `/api/v1` services using only canonical `reviews` and `review_moderation`. An independent moderator must approve; published content can be hidden or withdrawn. No sentiment-based approval or profitability metric is inferred. Public naming/audience policies are not assumed: the current API is members-only and uses “Community member.” No parallel revision/report/aggregate tables or unversioned proposal APIs were introduced.
+
+Default deployment remains off pending privacy, moderation staffing, retention and operational approval. The SSR fixture preview remains labeled and isolated. Edits, resubmission, appeals, public marketing/SEO and public aggregates are deferred; the approved one-account slot survives withdrawal. Current fields, routes, tested behavior and release/rollback gates are in the [Phase 11 implementation report](architecture/experience-phase.md). Remaining prose below records the earlier assessment/proposals, not current implementation claims.
 
 Status: implementation authorized; live release remains dependent on production foundations and unresolved policy decisions. The user approved application-only reviews, one review per account, 1–5 stars, human approval before publication, and verified email for submission. Other proposed rules remain subject to approval.
 

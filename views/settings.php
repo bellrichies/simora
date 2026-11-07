@@ -8,6 +8,7 @@ $date = static fn (string $value): string => (new DateTimeImmutable($value))->fo
 <link rel="stylesheet" href="/assets/settings.css">
 <script src="/assets/settings.js" defer></script>
 <div class="page-container pl-page st-page" data-settings-page>
+<?php require __DIR__ . '/components/model-access.php'; ?>
 <header class="pl-header"><div><p class="pl-eyebrow">YOUR ACCOUNT</p><h2>Your workspace. <span>Your preferences.</span></h2><p>Review your profile and tailor the preview to the way you explore.</p></div><a class="st-button" href="/support">Visit support <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></header>
 <div class="pl-notice"><i class="bi bi-info-circle" aria-hidden="true"></i><span>Demo account. Editable settings are saved only in this browser; live profile, security and notification services are not connected.</span><small>LOCAL PREVIEW</small></div>
 <section aria-labelledby="settings-overview-heading"><div class="pl-heading"><h3 id="settings-overview-heading">Your account at a glance</h3><span>Sample account &middot; <?= e($preferences['profile']['account_id']) ?></span></div><div class="pl-grid st-summary">

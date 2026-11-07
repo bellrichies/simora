@@ -95,7 +95,7 @@ final class DashboardController
             $billing = null;
             $billingError = null;
             try {
-                if ($billingConfig['provider'] !== 'mock') {
+                if ($billingConfig['preview_provider'] !== 'mock') {
                     throw new \RuntimeException('Live billing is not connected.');
                 }
                 $billingService = new \App\Services\BillingService(

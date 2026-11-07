@@ -2,6 +2,22 @@
 <phpunit bootstrap="vendor/autoload.php" cacheDirectory=".tools/phpunit-cache"
          failOnWarning="true" failOnRisky="true" colors="true">
     <testsuites>
+        <testsuite name="experience">
+            <file>tests/ExperiencePolicyTest.php</file>
+        </testsuite>
+        <testsuite name="payments">
+            <file>tests/PaystackProviderTest.php</file>
+        </testsuite>
+        <testsuite name="plan-policy">
+            <file>tests/PlanPolicyTest.php</file>
+        </testsuite>
+        <testsuite name="strategy-simulator">
+            <file>tests/StrategySimulatorTest.php</file>
+        </testsuite>
+        <testsuite name="api-ssr">
+            <file>tests/ApiSsrTest.php</file>
+            <file>tests/LegacyRoutesTest.php</file>
+        </testsuite>
         <testsuite name="model-health">
             <file>tests/ModelHealthTest.php</file>
         </testsuite>

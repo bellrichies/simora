@@ -1,4 +1,10 @@
-# Support module architecture and implementation blueprint
+# Support module notes
+
+## Phase 11 current implementation — 2026-11-06
+
+The [master V4 blueprint](SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md) is authoritative; historical extra tables and API suggestions below remain proposals. Current gated `/api/v1` services implement owner-only tickets, assigned-agent conversations, protected internal notes, restricted privacy/security cases, audited triage/assignment, resolution and shared abuse limits. No external message, attachment, SLA, reopen/auto-close behavior, Max priority routing or billing action is implied. Authenticated article reads require independent publication of immutable draft content; V4's unique slug is preserved, with an initial content version of 1. Further content edits/revisions need a defined policy rather than parallel revision tables.
+
+Deployment defaults off until operations/privacy/retention approvals and permissions are supplied. The SSR preview remains isolated and labeled. A privacy/deletion request can be recorded as an owner-bound `privacy_security` ticket once the approved support module is enabled; actual erasure/export and locked-out recovery remain operational gates. See [the Phase 11 implementation report](architecture/experience-phase.md) for exact contracts and tests. The assessment and proposed lifecycle below are historical; implemented transitions are deliberately narrower.
 
 Status: **implementation started**. The user authorized implementation; the current release is a local help preview. The production ticketing design below remains dependent on the stated identity, operational and policy prerequisites; proposed defaults are not established product promises. See [implementation plan](implementation-plan.md), [billing](plans-billing.md), [wallet](wallet.md), [referrals](referrals.md), [community chat](community-chat.md), [data contract](data-contract.md), and [platform board](platform-board.md); their domain-specific decisions govern their respective modules.
 

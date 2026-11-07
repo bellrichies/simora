@@ -6,7 +6,7 @@ Simora — Virtual Football Analytics.
 
 ## Source of Truth
 
-Read `docs/architecture/SIMORA_BACKEND_BLUEPRINT.md` before planning or implementing backend features.
+Read `docs/SIMORA_MASTER_BACKEND_BLUEPRINT_V4.md` before planning or implementing backend features. It is the authoritative blueprint; the former architecture path is obsolete.
 
 Also examine the existing source code, database reference schema, frontend views, tests, and module-specific documentation.
 
